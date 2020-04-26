@@ -17,14 +17,19 @@
         </li>
         <?php
       else:
-        ?>
-        <li class="nav-item">
-          <a class="nav-link" href="index.php?P=settings">Beállítások</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="index.php?P=logout">Kijelentkezés</a>
-        </li>
-      <?php endif;?>
-    </ul>
-  </div>
-</nav>
+        if($_SESSION['flags'] > 5):
+          ?>
+          <li class="nav-item">
+            <a class="nav-link" href="index.php?P=admin">Admin panel</a>
+          </li>
+        <?php endif;?>
+          <li class="nav-item">
+            <a class="nav-link" href="index.php?P=settings">Beállítások</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.php?P=logout">Kijelentkezés</a>
+          </li>
+        <?php endif;?>
+      </ul>
+    </div>
+  </nav>
