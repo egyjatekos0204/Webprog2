@@ -18,8 +18,8 @@
     <tr>
       <th scope="row"><?=$i?></th>
       <td><?=$d['Name']?></td>
-      <td><a href="#">Szerkesztés</a></td>
-      <td><a href="#">Törlés</a></td>
+      <td><a href="<?='index.php?P=citiesEdit&id='.$d['cid'] ?>">Szerkesztés</a></td>
+      <td><a href="<?='index.php?P=citiesDelete&id='.$d['cid'] ?>">Törlés</a></td>
     </tr>
 <?php $i++;endforeach;?>
   </tbody>

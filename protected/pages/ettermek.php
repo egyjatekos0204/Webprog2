@@ -15,7 +15,7 @@
 				//$s ="SELECT column_name(s) FROM table1 INNER JOIN table2 ON table1.column_name = table2.column_name;";
 				$params = [ ':varos' => $_GET['V']];
 				$datas = getList($query,$params);
-				var_dump($datas);
+				//var_dump($datas);
 
 			for ($i=0; $i < count($datas); $i++):?>
 			<div class="card mb-3 m-2" style="max-width: 460px;">

@@ -58,6 +58,51 @@ switch ($_GET['P']) {
 		}
 	break;
 
+	case 'citiesEdit':
+	if(isset($_SESSION['flags'])&&$_SESSION['flags'] > 5){
+		require_once PROTECTED_DIR.'admin/citiesEdit.php';
+	}
+	else{
+		header('Location: index.php');
+	}
+	break;
+
+	case 'citiesDelete':
+	if(isset($_SESSION['flags'])&&$_SESSION['flags'] > 5){
+		require_once PROTECTED_DIR.'admin/citiesDelete.php';
+	}
+	else{
+		header('Location: index.php');
+	}
+	break;
+
+	case 'userEdit':
+	if(isset($_SESSION['flags'])&&$_SESSION['flags'] > 5){
+		require_once PROTECTED_DIR.'admin/userEdit.php';
+	}
+	else{
+		header('Location: index.php');
+	}
+	break;
+
+	case 'userDelete':
+	if(isset($_SESSION['flags'])&&$_SESSION['flags'] > 5){
+		require_once PROTECTED_DIR.'admin/userDelete.php';
+	}
+	else{
+		header('Location: index.php');
+	}
+	break;
+
+	case 'userAdd':
+	if(isset($_SESSION['flags'])&&$_SESSION['flags'] > 5){
+		require_once PROTECTED_DIR.'admin/userAdd.php';
+	}
+	else{
+		header('Location: index.php');
+	}
+	break;
+
 	case 'settings':
 	break;
 

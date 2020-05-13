@@ -13,15 +13,17 @@
 				$query = "SELECT * FROM foods WHERE restid = :etlapid";
 				$params = [ 'etlapid' => $_GET['etlapid']];
 				$datas = getList($query,$params);
-				var_dump($datas);
+				//var_dump($datas);
 
 				for ($i=0; $i < count($datas); $i++):?>
 					<div class="card m-3">
 						<h5 class="card-header"><?=$datas[$i]['fname']?></h5>
 						<div class="card-body">
 							<h5 class="card-title"><?=$datas[$i]['fprice']?> ft</h5>
-							<!--<p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
-							<a href="#" class="btn btn-primary">Rendelés</a>
+							<?php if(isset($_SESSION['logged']) && $_SESSION['logged']): ?><a href="#" class="btn btn-primary">Rendelés</a>
+							<?php else: ?>
+								<a href="#" class="btn btn-secondary">Kérlek jelentkezz be!</a>
+							<?php endif; ?>
 						</div>
 					</div>
 				<?php endfor;endif;?>

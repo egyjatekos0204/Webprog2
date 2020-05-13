@@ -2,7 +2,7 @@
 require_once DATABASE_CONTROLLER;
 
 if(isset($_POST['edit'])):
-	$query = "INSERT INTO restaurants (name, szall_ido, szall_dij, ertekeles_ossz, ertekelok_szama, cityId VALUES (:email, :szall_ido, :szall_dij, :ertekeles_ossz, :ertekelok_szama, :cityId)";
+	$query = "INSERT INTO restaurants (name, szall_ido, szall_dij, ertekeles_ossz, ertekelok_szama, cityId) VALUES (:email, :szall_ido, :szall_dij, :ertekeles_ossz, :ertekelok_szama, :cityId)";
 	$params = [ 
 	':name' => $_POST['name'],
 	':szall_ido' => $_POST['szall_ido'],
