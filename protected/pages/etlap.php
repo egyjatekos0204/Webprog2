@@ -13,7 +13,6 @@
 				$query = "SELECT * FROM foods WHERE restid = :etlapid";
 				$params = [ 'etlapid' => $_GET['etlapid']];
 				$datas = getList($query,$params);
-				//var_dump($datas);
 
 				for ($i=0; $i < count($datas); $i++):?>
 					<div class="card m-3">

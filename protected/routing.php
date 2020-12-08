@@ -1,36 +1,55 @@
 <?php
 
+function check_admin_flag(){
+	if(isset($_SESSION['flags'])&&$_SESSION['flags'] > 5)
+	{
+		return true;
+	}
+		
+}
+
+function check_user_is_restaurant(){
+	if(isset($_SESSION['flags']) && $_SESSION['flags'] == 3){
+		return true;
+	}
+}
+
+
 if(empty($_GET['P']))
 	$_GET['P'] = 'home';
 
 switch ($_GET['P']) {
 	case 'home':
-	if(!isset($_GET['V'])){
-		require_once PROTECTED_DIR.'pages/home.php';
+		if(!isset($_GET['V'])){
+			require_once PROTECTED_DIR.'pages/home.php';
 
-	}
-	else {
-		require_once PROTECTED_DIR.'pages/ettermek.php';
-	}
-	require_once PROTECTED_DIR.'pages/login.php';
-	require_once PROTECTED_DIR.'pages/register.php';
-	require_once PROTECTED_DIR.'database.php';
-	break;
+		}
+		else {
+			require_once PROTECTED_DIR.'pages/ettermek.php';
+		}
+		require_once PROTECTED_DIR.'pages/login.php';
+		require_once PROTECTED_DIR.'pages/register.php';
+		require_once PROTECTED_DIR.'database.php';
+		break;
 
 	case 'logout':
-	session_destroy();
-	header("Location: index.php?");
-	die();
+		session_destroy();
+		header("Location: index.php?");
+		die();
+		break;
+
+	case 'rendallapot':
+		require_once PROTECTED_DIR.'database.php';
+		require_once PROTECTED_DIR.'pages/rendallapot.php';	
 	break;
-
-
+		
 	case 'etlap':
 	require_once PROTECTED_DIR.'pages/etlap.php';
 	require_once PROTECTED_DIR.'pages/login.php';
 	require_once PROTECTED_DIR.'pages/register.php';
 	require_once PROTECTED_DIR.'database.php';
 	break;
-
+		
 	case 'admin':
 		if(isset($_SESSION['flags'])&&$_SESSION['flags'] > 5){
 			require_once PROTECTED_DIR.'admin/adminIndex.php';
@@ -39,76 +58,80 @@ switch ($_GET['P']) {
 			header('Location: index.php');
 		}
 		break;
+	case 'citiesEdit':
+		if(check_admin_flag()){
+			require_once PROTECTED_DIR.'admin/citiesEdit.php';
+		}
+		else{
+			header('Location: index.php');
+		}
+		break;
 
 	case 'restaurantEdit':
-		if(isset($_SESSION['flags'])&&$_SESSION['flags'] > 5){
+		if(check_admin_flag()){
 			require_once PROTECTED_DIR.'admin/restaurantEdit.php';
 		}
 		else{
 			header('Location: index.php');
 		}
 	break;
+	
+	case 'userAdd':
+		if(check_admin_flag()){
+			require_once PROTECTED_DIR.'admin/userAdd.php';
+		}
+		else{
+			header('Location: index.php');
+		}
+		break;
+	case 'userDelete':
+		if(check_admin_flag()){
+			require_once PROTECTED_DIR.'admin/userDelete.php';
+		}
+		else{
+			header('Location: index.php');
+		}
+		break;
+	case 'userEdit':
+		if(check_admin_flag()){
+			require_once PROTECTED_DIR.'admin/userEdit.php';
+		}
+		else{
+			header('Location: index.php');
+		}
+		break;
 
-	case 'restaurantDelete':
-		if(isset($_SESSION['flags'])&&$_SESSION['flags'] > 5){
-			require_once PROTECTED_DIR.'admin/restaurantDelete.php';
+	case 'orders':
+		if(check_user_is_restaurant() || check_admin_flag()){
+			require_once PROTECTED_DIR.'pages/orders.php';
+		}
+		break;
+	case 'addRestaurant':
+		if(check_admin_flag()){
+			require_once PROTECTED_DIR.'admin/addRestaurant.php';
 		}
 		else{
 			header('Location: index.php');
 		}
 	break;
-
-	case 'citiesEdit':
-	if(isset($_SESSION['flags'])&&$_SESSION['flags'] > 5){
-		require_once PROTECTED_DIR.'admin/citiesEdit.php';
-	}
-	else{
-		header('Location: index.php');
-	}
+	
+	case 'orderDelete':
+		if(check_user_is_restaurant() || check_admin_flag()){
+			require_once PROTECTED_DIR.'restaurant/deleteOrder.php';
+		}
+		else {
+			header('Location: orders.php');
+		}
 	break;
 
-	case 'citiesDelete':
-	if(isset($_SESSION['flags'])&&$_SESSION['flags'] > 5){
-		require_once PROTECTED_DIR.'admin/citiesDelete.php';
-	}
-	else{
-		header('Location: index.php');
-	}
+	case 'orderReady':
+		if(check_user_is_restaurant() || check_admin_flag()){
+			require_once PROTECTED_DIR.'restaurant/readyOrder.php';
+		}
+		else {
+			header('Location: orders.php');
+		}
 	break;
-
-	case 'userEdit':
-	if(isset($_SESSION['flags'])&&$_SESSION['flags'] > 5){
-		require_once PROTECTED_DIR.'admin/userEdit.php';
-	}
-	else{
-		header('Location: index.php');
-	}
-	break;
-
-	case 'userDelete':
-	if(isset($_SESSION['flags'])&&$_SESSION['flags'] > 5){
-		require_once PROTECTED_DIR.'admin/userDelete.php';
-	}
-	else{
-		header('Location: index.php');
-	}
-	break;
-
-	case 'userAdd':
-	if(isset($_SESSION['flags'])&&$_SESSION['flags'] > 5){
-		require_once PROTECTED_DIR.'admin/userAdd.php';
-	}
-	else{
-		header('Location: index.php');
-	}
-	break;
-
-	case 'settings':
-	break;
-
-	default:
-		require_once PROTECTED_DIR.'pages/404.php';
-	break;
-	}
-
+		break;
+}
 ?>

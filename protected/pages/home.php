@@ -21,7 +21,6 @@
 		</div>
 	</div>
 </div>
-
 <div class="szurke container-fluid d-flex align-items-center mt-10 ">
 	<div class="row flex-column flex-sm-column flex-md-column flex-lg-row flex-lx-row flex-wrap">
 		<div class="col d-flex "><img class="csalogatopizza mx-auto"src="<?=PUBLIC_DIR.'pizzabg.jpg'?>"></div>

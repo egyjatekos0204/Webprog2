@@ -6,7 +6,7 @@ if($_SESSION['flags'] > 5){
 	$params = [':id' => $_GET['id']];
 	if(!executeDML($query,$params))
 	{
-		echo 'Gebasz van!';
+		echo 'Hiba történt a törlés során!';
 	}
 
 	else {

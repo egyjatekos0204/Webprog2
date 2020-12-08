@@ -5,7 +5,6 @@ if(isset($_POST['edit'])):
 	$query = "INSERT INTO cities (Name) VALUES (:Name)";
 	$params = [':Name' => $_POST['Name']];
 	if(!executeDML($query,$params)):
-		echo 'Gebasz van<br>';
 		print_r($_POST);
 		echo '<br>';
 		print_r($params);
@@ -24,6 +23,5 @@ else:
 			</div>
 			<button name="edit" type="submit" class="btn btn-primary">Hozzáadás</button>
 		</form>
-
 	</div>
-	<?php endif;?>
+<?php endif;?>

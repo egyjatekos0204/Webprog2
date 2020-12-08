@@ -1,12 +1,10 @@
 
-
-<!-- Modal -->
-<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <form method="POST">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Regisztráció</h5>
+          <h5 class="modal-title">Regisztráció</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -31,7 +29,7 @@
 
           <div class="form-group form-check">
             <input type="checkbox" class="form-check-input"value="true" name="yes">
-            <label class="form-check-label" for="exampleCheck1">Elolvastam és elfogadom a felhasználási feltételeket!</label>
+            <label class="form-check-label">Elolvastam és elfogadom a felhasználási feltételeket!</label>
           </div>
 
         </div>
@@ -46,36 +44,29 @@
 
 <?php 
 
-
-
-
 if(isset($_POST['regisztracio']))
 {
+    //Adatbázis müveletek importálása
   require_once PROTECTED_DIR.'database.php';
 
+    //Mezők ellenörzése
   $username = test_input($_POST['inputRegisterUsername']);
-
   $email = test_input($_POST['inputRegisterEmail']);
   $email1 = test_input($_POST['inputRegisterEmail1']);
-
   $password = test_input($_POST['inputRegisterPassword']);
   $password1 = test_input($_POST['inputRegisterPassword1']);
 
+
+  // Hibák összegyüjtése
   $hiba = "";
   if(!isset($_POST['yes']))
     $hiba .= "Kérled fogadd el a felhasználási feltételeket!";
-    
-
-
-  if (empty($email) || empty($email1) || empty($password) || empty($password1) || empty($username)){
+  if (empty($email) || empty($email1) || empty($password) || empty($password1) || empty($username))
     $hiba .= "Kérlek tölts ki minden mezőt! <br>";
-  }
-  if($email != $email1){
+  if($email != $email1)
     $hiba .= "A két email nem egyezik meg! <br>";
-  }
-  if($password != $password1){
+  if($password != $password1)
     $hiba .= "A két jelszó nem egyezik meg! <br>";
-  }
 
   
   if(!getConnection()){
@@ -96,8 +87,9 @@ if(isset($_POST['regisztracio']))
 </div>';
   }
   else {
+      // Kódolás
     $codedpass = sha1($password);
-    $query = "INSERT INTO users (username,email, password) VALUES (:username,:email, :password)";
+    $query = "INSERT INTO users (username,email, password) VALUES (:username, :email, :password)";
     if(executeDML($query, [":username" => $username,":email" => $email, ":password" => $codedpass])){
       echo '<div class="alert alert-success alert-dismissible fade show succRegister" role="alert">
   <strong>Sikeres regisztráció!</strong> Most már bejelentkezhet.
